@@ -1,0 +1,34 @@
+﻿2017/04/21 13:47:23 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\fumi0\OneDrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Resquerobot\Resquerobot.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /wd4996 /analyze- /errorReport:prompt EventListener.cpp cvMat2HDC.cpp
+         EventListener.cpp
+     1>C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\opencv249\build\include\opencv2/legacy/compat.hpp : warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+     1>EventListener.cpp(28): warning C4005: 'AXIS_MAX' : マクロが再定義されました。
+                 c:\users\fumi0\onedrive\ドキュメント\visual studio 2013\projects\resquerobot\resquerobot\TPIP3.h(35) : 'AXIS_MAX' の前の定義を確認してください
+     1>EventListener.cpp(29): warning C4005: 'AXIS_MIN' : マクロが再定義されました。
+                 c:\users\fumi0\onedrive\ドキュメント\visual studio 2013\projects\resquerobot\resquerobot\TPIP3.h(36) : 'AXIS_MIN' の前の定義を確認してください
+     1>EventListener.cpp(693): warning C4244: '=' : 'ULONGLONG' から 'DWORD' への変換です。データが失われる可能性があります。
+     1>EventListener.cpp(610): warning C4101: 'axis3' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(610): warning C4101: 'axis8' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(610): warning C4101: 'axis5' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(610): warning C4101: 'axis7' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(609): warning C4101: 'axis2' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(609): warning C4101: 'msg3' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(610): warning C4101: 'axis4' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(610): warning C4101: 'axis6' : ローカル変数は 1 度も使われていません。
+     1>EventListener.cpp(609): warning C4101: 'axis1' : ローカル変数は 1 度も使われていません。
+         cvMat2HDC.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Release\Resquerobot.exe" /NOLOGO opencv_core249.lib opencv_highgui249.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Release\Resquerobot.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Release\Resquerobot.lib" /MACHINE:X86 /SAFESEH Release\cvMat2HDC.obj
+         Release\EventListener.obj
+         Release\WindowManager.obj
+         Release\WinMain.obj
+         コード生成しています。
+         コード生成が終了しました。
+         Resquerobot.vcxproj -> C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Release\Resquerobot.exe
+     1>プロジェクト "C:\Users\fumi0\OneDrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Resquerobot\Resquerobot.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:02.04

@@ -1,0 +1,16 @@
+﻿2017/04/21 13:46:40 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\fumi0\OneDrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Resquerobot\Resquerobot.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /wd4996 /analyze- /errorReport:prompt cvMat2HDC.cpp
+         cvMat2HDC.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Debug\Resquerobot.exe" /INCREMENTAL /NOLOGO opencv_core249d.lib opencv_highgui249d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Debug\Resquerobot.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Debug\Resquerobot.lib" /MACHINE:X86 Debug\cvMat2HDC.obj
+         Debug\EventListener.obj
+         Debug\WindowManager.obj
+         Debug\WinMain.obj
+         Resquerobot.vcxproj -> C:\Users\fumi0\onedrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Debug\Resquerobot.exe
+     1>プロジェクト "C:\Users\fumi0\OneDrive\ドキュメント\visual studio 2013\Projects\Resquerobot\Resquerobot\Resquerobot.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.19
