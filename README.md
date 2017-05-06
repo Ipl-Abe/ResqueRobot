@@ -1,1 +1,3 @@
 # ResqueRobot
+visual studio 2015でのビルドの際Debugモードで行うとコンパイルエラーになるので
+Releaseモードで行ってください.
