@@ -13,9 +13,17 @@
 #ifndef __MSG_CRACKER_H__
 #define __MSG_CRACKER_H__
 
+//#pragma comment(lib,"wsock32.lib")
+//#pragma comment(lib,"ws2_32.lib")
 #include <windows.h>
+//#include <winsock2.h>
+//#include <ws2tcpip.h>
 
 #define ID_MYTIMER 201 //!< @brief タイマーID
+
+
+
+
 
 
 /** WM_CREATEのメッセージクラッカー */

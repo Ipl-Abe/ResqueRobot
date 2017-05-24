@@ -16,8 +16,13 @@
 #include <Windows.h>
 #include <WindowsX.h>
 
+
+
+
+
+
 /** メインウィンドウの生成 */
 extern HWND createMainWindow(HINSTANCE hInstance, const TCHAR* title, int x, int y, int w, int h);
 
-
+void SetUpUDP();
 #endif

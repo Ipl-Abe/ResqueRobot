@@ -21,7 +21,7 @@
 #define WINDOW_WIDTH  (1200)                    //!< @brief ウィンドウの横幅
 #define WINDOW_HEIGHT ( 650)                    //!< @brief ウィンドウの縦幅
 
-#define IP            ("192.168.2.103")		//3号機
+#define IP            ("192.168.2.102")		//3号機
 
 /*--------- include ---------*/
 
@@ -30,10 +30,21 @@
 #include "TPIP3.h"          // TPIP関係
 
 #include "WindowManager.h"  // ウィンドウ関係
-
-
+//
+//#include <winsock2.h>
+//#include <ws2tcpip.h>
+#pragma comment(lib,"wsock32.lib")
+#pragma comment(lib,"ws2_32.lib")
 
 /*--------- 関数定義 ---------*/
+
+
+
+
+//WSADATA wsdata;
+
+
+
 
 /**
 * サブシステムをWindowsにした際のプログラムのエントリーポイント(一番最初に実行される関数)\n
@@ -48,6 +59,8 @@
 *
 */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow) {
+	
+
 
 
 	HWND hwnd; // ウィンドウハンドル
@@ -55,14 +68,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 	TCHAR title[] = TEXT("robot_3");
 	hwnd = createMainWindow(hInstance, title, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);	// ウィンドウの生成
 
-	TPGM_create(hwnd, VGA, NULL);	// 画像空間（サーフェイス）を生成する
+	TPGM_create(hwnd, QVGA, NULL);	// 画像空間（サーフェイス）を生成する
 	TPGC_init(hInstance, hwnd);		// ゲームコントローラ入力関数の初期化
 
-	TPJT_set_video_inf(VGA);		// カメラ映像の解像度を指定する
+	TPJT_set_video_inf(QVGA);		// カメラ映像の解像度を指定する
 	TPJT_init(IP, hwnd);			// 通信先の設定
 	TPJT_set_com_req(0x03, 0);		// 通信内容の設定
 
+
+
+
+
+	
 	ShowWindow(hwnd, iCmdShow);		// ウィンドウの表示
+
+	struct sockaddr_in dest_destSockAddr;
+
+	
+
+
 
 	// イベントを処理する
 	while (GetMessage(&msg, NULL, 0, 0)) {
@@ -72,3 +96,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 	}
 	return msg.wParam;
 }
+
+//void SetUpUDP(){
+//
+//	WSAStartup(MAKEWORD(2,0),&wsdata);
+//
+//	memset(&);
+//
+//
+//}

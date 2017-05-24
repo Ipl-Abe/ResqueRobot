@@ -19,7 +19,11 @@
 //#include <winsock2.h>
 //#include<winsock2.h>
 //#include<ws2tcpip.h>
-
+char destination[80];
+unsigned short port = 9877;
+int destsocket;
+WSAData data;
+struct sockaddr_in destSockAddr;
 //#pragma comment( lib, "wsock32.lib" )
 //#pragma comment( lib, "ws2_32.lib")
 
@@ -183,6 +187,34 @@ void rendController()
 *
 */
 BOOL onCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct) {
+
+
+	//WSADATA data;
+
+
+	//struct sockaddr_in destSockAddr;
+	
+	WSAStartup(MAKEWORD(2, 0), &data);
+
+	memset(&destSockAddr, 0, sizeof(destSockAddr));
+
+
+	destsocket = socket(AF_INET, SOCK_DGRAM, 0);
+	if (destsocket == INVALID_SOCKET){
+		return 125;
+	}
+
+	destSockAddr.sin_addr.S_un.S_addr = inet_addr("192.168.2.20");
+	destSockAddr.sin_port = htons(port);
+	destSockAddr.sin_family = AF_INET;
+
+
+
+	//sendto(destsocket,"HELLO",5,0,(struct sockaddr *)&destSockAddr,sizeof(destSockAddr));
+
+
+	
+
 
 
 	TPJT_set_ctrl(&mOutDt, sizeof(mOutDt));	// 制御出力データセット
@@ -557,44 +589,75 @@ void onKeyup(HWND hwnd, UINT vk, BOOL fDown, int cRepeat, UINT flags) {
 */
 
 void onPaint(HWND hwnd) {
-	//DWORD nBegin = ::GetTickCount();
-	static int img_sz = 0; //画像取り込みサイズ  
+
+	static const int sendSize = 65500;
+	char buff[sendSize];
+	std::vector<unsigned char> ibuff;
+	std::vector<int> param = std::vector<int>(2);
+	param[0] = CV_IMWRITE_JPEG_QUALITY;
+	param[1] = 20;
+
+	static int img_sz = 10; //画像取り込みサイズ  
 	IplImage *tpipImage, *dst_img, *gray_img; //入力画像バッファ
 	HDC   hdc;       // デバイスコンテキスト
 	//RECT  dst, src = {0, 0, 640, 480};
-	void* mJpegData;  // JPEGデータ格納変数
+	void *mJpegData;  // JPEGデータ格納変数
+	//mJpegData = malloc(JPEG_BUF_);
 	int   mJpegSize;  // JPEGデータサイズ
 	int connectId = TPJT_get_com_mode();
 	updatePaint = 1;			// onPaint 更新フラグを更新済に
 	//OpenCVの画像バッファの生成
-	tpipImage = cvCreateImage(cvSize(320, 300), IPL_DEPTH_8U, 3);
+	//tpipImage = cvCreateImage(cvSize(320, 260), IPL_DEPTH_8U, 3);
+	tpipImage = cvCreateImage(cvSize(320,240),IPL_DEPTH_8U,3);
 	//tpipImageリサイズ用画像
 	dst_img = cvCreateImage(cvSize(600, 600), IPL_DEPTH_8U, 3);
 	gray_img = cvCreateImage(cvSize(600, 600), IPL_DEPTH_8U, 1);
 	//Jpegデータの取り出し
 	mJpegData = TPJT_get_jpeg_file(0, 0, &mJpegSize);	// JPEGデータの取出し
 
+	cv::Mat sendImg;
+
+
+
+
+
+
+
 
 
 	if ((mJpegData) && (mJpegSize > 0)) {	// JPEGデータが有りの場合
 
+		cv::Mat* image = static_cast<cv::Mat*>(mJpegData);
+		//TPGM_decode(mJpegData, mJpegSize);	// JPEGデータをカメラ画像にデコードする
+		img_sz = TPGM_JPEGbuffer2CV(mJpegData, (DWORD)mJpegSize, tpipImage);
 
+		sendImg = cv::cvarrToMat(tpipImage);
 
-	//	img_sz = TPGM_JPEGbuffer2CV(mJpegData, mJpegSize, tpipImage);
+		float Num = (sendImg.rows *sendImg.step) / sendSize;
+		cv::imencode(".jpg",sendImg,ibuff,param);
+
+		if (ibuff.size() < sendSize){
+			for (int i = 0; i < ibuff.size(); i++){
+				buff[i] = ibuff[i];
+			}
+			sendto(destsocket,buff,sendSize,0,(LPSOCKADDR)&destSockAddr,sizeof(destSockAddr));
+		}
 		//cvResize(tpipImage, dst_img, CV_INTER_LINEAR);
 		//cvCvtColor(dst_img, gray_img, CV_BGR2GRAY);
 		//cvThreshold(gray_img,gray_img,0,255,CV_THRESH_BINARY|CV_THRESH_OTSU);
 		//cvAdaptiveThreshold(gray_img, gray_img, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY, 7, 8);
 		//img_sz = TPGM_JPEGbuffer2CV(mJpegData,mJpegSize,tpipImage);
 
-		cvNamedWindow("cv", CV_WINDOW_AUTOSIZE || CV_WINDOW_FREERATIO);
+		cvNamedWindow("cv", CV_WINDOW_FREERATIO);
 		cvNamedWindow("cv_gray", CV_WINDOW_AUTOSIZE || CV_WINDOW_FREERATIO);
-		//cvShowImage("cv",tpipImage);
-		cvShowImage("cv", dst_img);
-		cvShowImage("cv_gray", gray_img);
+		cvShowImage("cv",tpipImage);
+		//cvShowImage("cv", image);
+		cv::imshow("cv_gray", sendImg);
 
 
 		TPGM_decode(mJpegData, mJpegSize);	// JPEGデータをカメラ画像にデコードする
+
+
 	}
 	TPJT_free_jpeg_file();					// JPEGデータの解放
 	cvReleaseImage(&tpipImage);

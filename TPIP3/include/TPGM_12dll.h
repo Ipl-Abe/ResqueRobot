@@ -18,7 +18,8 @@
 
 #ifndef __JDRAW_DDL_H__
 #define __JDRAW_DDL_H__
-
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 extern BOOL	__stdcall TPGM_create(HWND,int,HBITMAP);	// サーフェス生成
 extern BOOL	__stdcall TPGM_create_ex(HWND,int,HBITMAP, HBRUSH);	// サーフェス生成
@@ -33,9 +34,9 @@ extern int	__stdcall TPGM_sprite2(RECT*,int dst_x,int dst_y);	// スプライト描画
 extern int __declspec(dllimport) TPGM_JPEGfile2DIB(LPCSTR lpszPathName, BITMAPINFOHEADER* dib, unsigned int dib_sz);
 extern int __declspec(dllimport) TPGM_JPEGbuffer2DIB(void* lpSrc, DWORD dwSize, BITMAPINFOHEADER* dib, unsigned int dib_sz);
 
-#ifdef __CV_H__		// V1.10 append
-//extern int __declspec(dllimport) TPGM_JPEGbuffer2CV(void* lpSrc, DWORD dwSize, IplImage *image);
-#endif
+//#ifdef __CV_H__		// V1.10 append
+extern int __declspec(dllimport) TPGM_JPEGbuffer2CV(void* lpSrc, DWORD dwSize, IplImage *image);
+//#endif
 
 extern void	__stdcall TPGM_copy2(RECT*,RECT*);				// JPEG画像コピー（範囲指定）
 
